@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+
+    <link rel="stylesheet" href="assets/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="assets/plugins/fontawesome/css/fontawesome.min.css">
+    <link rel="stylesheet" href="assets/plugins/fontawesome/css/all.min.css">
+    <script src="assets/js/jquery-3.6.0.min.js"></script>
+    <script>
+        var employeerec=[];
+        var i=0;
+
+        function init()
+        {
+          $(".error").hide();
+        }
+
+        window.onload=init;
+
+        function validate()
+        {
+          var con=confirm("Do you want to submit this record");
+
+          if (con==true)
+          {
+            var id=$("#email").val();
+            var pwd=$("#pwd").val();
+            var cpwd=$("#cpwd").val();
+            var error=false;
+
+            if (id=="")
+            {
+              //alert("Email must be entered");
+              $("#emailError").show();
+              $("#email").focus();
+              error=true;
+            }
+
+            if (pwd=="")
+            {
+              //alert("password must be entered");
+              $("#pwdError").show();
+              $("#pwd").focus();
+              error=true;
+            }
+
+            if (cpwd=="")
+            {
+              //alert("Confirm password must be entered");
+              $("#cpwdError1").show();
+              $("#cpwd").focus();
+              error=true;
+            }
+
+            if (pwd!=cpwd)
+            {
+             // alert("password and confirm password must be same");
+              $("#cpwdError").show();
+              $("#cpwd").focus();
+              error=true;
+            }
+
+            //record saving
+            if (error==false)
+            {
+              var employee={};
+              employee.email=$("#email").val();
+              employee.pwd=$("#pwd").val();
+
+              employeerec[i]=employee;
+              i++;
+
+              console.log(employeerec);
+
+              alert("Your record has been saved");
+            }
+
+          }
+        }
+
+        function getCity(v)
+        {
+          var pakcity=["Karachi","Lahore","Islamabad"];
+          var indcity=["Dehli","Mombay","Hyderabad","Kalkata"];
+          
+          document.getElementById("city").innerHTML="<option>Please select city</option>";
+
+          if (v==1)
+          {
+            for (var i=0; i<=2; i++)
+                document.getElementById("city").innerHTML+="<option>"+pakcity[i]+"</option>";
+          }
+
+          if (v==2)
+          {
+            for (var i=0; i<=3; i++)
+            document.getElementById("city").innerHTML+="<option>"+indcity[i]+"</option>";
+          }
+
+        }
+    </script>
+</head>
+<body>
+    
+    <div class="container">
+        <div class="row" style="margin-top: 100px; height: 70%;">
+
+           <div class="col-md-6" style="
+            height: 700px;
+           background-color: aqua;
+           background-image: url(assets/img/login.jpg);
+           padding: 10px;
+           display: flex; align-items: center; justify-content: center;
+           ">
+                <h1>Aptech</h1>
+           </div>
+           <div class="col-md-6" style="height: 100%;">
+               <p style="text-align: center; font-size:x-large; color: blue;">
+                   Sign Up
+               </p>
+               <p style="text-align: center; font-size:x-large; color: rgb(255, 0, 34);">
+                <span id="msg"></span>
+               </p>
+               <p>
+                   <form action="">
+                      <div class="form-group">
+                        <input id="email" class="form-control" type="text" placeholder="Type Email Here">
+                        <span style="color: red;" class="error" id="emailError">* Email must be entered</span>
+                      </div>
+                      <div class="form-group">
+                        <input id="pwd" class="form-control" type="password" placeholder="Type Password Here">
+                        <span style="color: red;" class="error" id="pwdError">* Password must be entered</span>
+                      </div>
+                      <div class="form-group">
+                        <input id="cpwd" class="form-control" type="password" placeholder="Confirm Password Here">
+                        <span style="color: red;" class="error" id="cpwdError1">* Confirm Password must be entered</span>
+                        <span style="color: red;" class="error" id="cpwdError">* Password and Confirm Password must be same</span>
+                      </div>
+                      <div class="form-group">
+                        <select id="country" class="form-control" onchange="getCity(value)">
+                          <option value="-1">Please Select Country</option>
+                           <option value="1">Pakistan</option>
+                           <option value="2">India</option>
+                           <option value="3">UAE</option>
+                        </select>
+                       </div>
+                      <div class="form-group">
+                        <select id="city" class="form-control">
+                            
+                        </select>
+                      </div>
+                      <div class="form-group">
+                       <textarea name="" id="address" cols="30" rows="10"  placeholder="Type Address Here"></textarea>
+                      </div>
+                      <div class="form-group">
+                        <input class="btn btn-primary btn-block" type="button" value="Login" onclick="validate()">
+                      </div>
+                   </form>
+               </p>
+               <div style="display: flex; align-items: center; justify-content: center;">
+                   
+                <span style="text-align: center; font-size:x-large; color: rgb(255, 0, 34); margin-right: 5px;">Login with</span>
+              
+                       <a href="http://google.com" style="font-size: 30px; width: 40px; height: 40px;">
+                        <i class="fab fa-facebook"></i>
+                       </a>
+                      <a href="http://google.com" style="font-size: 30px; width: 40px; height: 40px;">
+                     <i class="fab fa-google"></i>
+                    </a>
+                </div>
+                <span style="display:flex; justify-content: center; align-items:center; font-size:x-large; color: green;">
+              
+              <a href="signup.html">Sign Up</a>
+              </span>
+           </div>
+        </div>
+    </div>
+</body>
+</html>
